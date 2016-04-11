@@ -47,5 +47,5 @@ In terminal
 ## TODO
 
 - [ ] Add more tests
-- [ ] Add HATEOS to self document API
-- [ ] Add authentication of some sort to the API 
+- [x] Add basic HATEOS to self document API - I may extend this
+- [ ] Add authentication of some sort to the API
