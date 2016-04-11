@@ -4,11 +4,18 @@ var itemController = function (Item) {
 
     //get the json data from the body
     var item = new Item(req.body);
-    //save item
-    item.save();
-    //send status as created and send back the created item
-    res.status(201).send(item);
 
+    //check for the required title
+    if (!req.body.title) {
+      res.status(400);
+      res.send('Title is required');
+    } else {
+      //save item
+      item.save();
+      //send status as created and send back the created item
+      res.status(201);
+      res.send(item);
+    }
 
   };
 
@@ -27,7 +34,8 @@ var itemController = function (Item) {
     Item.find(queries, function (error, items) {
       if (error) {
         console.log(error);
-        res.status(500).send(error);
+        res.status(500);
+        res.send(error);
       } else {
         res.json(items);
       }
@@ -47,7 +55,8 @@ var itemController = function (Item) {
     req.item.save(function (error) {
       if (error) {
         console.log(error);
-        res.status(500).send(error);
+        res.status(500);
+        res.send(error);
 
       } else {
         res.json(req.item);
@@ -77,7 +86,8 @@ var itemController = function (Item) {
     req.item.save(function (error) {
       if (error) {
         console.log(error);
-        res.status(500).send(error);
+        res.status(500);
+        res.send(error);
 
       } else {
         res.json(req.item);
@@ -91,11 +101,13 @@ var itemController = function (Item) {
     req.item.remove(function (error) {
       if (error) {
         console.log(error);
-        res.status(500).send(error);
+        res.status(500);
+        res.send(error);
 
       } else {
         //send back removed status
-        res.status(204).send('Removed item');
+        res.status(204);
+        res.send('Removed item');
       }
     });
   };

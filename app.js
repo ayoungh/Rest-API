@@ -22,14 +22,15 @@ app.use(bodyParser.json());
 
 
 //Routes - as it is a function we execute
-
 var itemRouter = require('./routes/itemRoutes')(Item);
-var userRouter = require('./routes/userRoutes')(User);
 //inject the item model into the function
 
+var userRouter = require('./routes/userRoutes')(User);
+//inject the user model into the function
 
 
-//set the app to use this before all routes for itemRouter
+
+//set the app to use this before all routes for itemRouter and userRouter
 app.use('/api/items', itemRouter);
 app.use('/api/users', userRouter);
 
