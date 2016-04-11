@@ -37,14 +37,42 @@ var itemController = function (Item) {
         res.status(500);
         res.send(error);
       } else {
-        res.json(items);
+
+        var returnedItems = [];
+
+        //loop through the items given back to add HATEOS
+        items.forEach(function (elm, inx, arr) {
+          //create a new item
+          var newItem = elm.toJSON();
+
+          //add link to the newItem
+          newItem.links = {};
+          newItem.links.self = 'http://'+req.headers.host+'/api/items/'+newItem._id;
+
+          //Push modified item to array
+          returnedItems.push(newItem);
+
+
+        });
+
+
+        res.json(returnedItems); //items - before we added HATEOS
       }
 
     });
   };
 
   var getOne = function (req, res) {
-    res.json(req.item);
+
+    var returnedItem = req.item.toJSON();
+
+    //add link to the returnedItem to show filter example
+    returnedItem.links = {};
+    returnedItem.links.filterByUser = 'http://'+req.headers.host+'/api/items/?user='+returnedItem.user;
+
+    //may need to clean whitespace in url
+
+    res.json(returnedItem); //req.item - before we added HATEOS
   };
 
   var put = function (req, res) {
