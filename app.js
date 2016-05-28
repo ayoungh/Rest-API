@@ -1,7 +1,13 @@
 var open = require('open'),
   express = require('express'),
+  jwt = require('jwt'),
+  expressJwt = require('express-jwt'),
   mongoose = require('mongoose'),
+  cors = require('cors'),
   bodyParser = require('body-parser');
+
+//get configs from a file
+var config = require('./config');
 
 //open connection to db
 var db = mongoose.connect('mongodb://localhost/restAPI');
@@ -14,11 +20,21 @@ var User = require('./models/userModel');
 var app = express();
 
 //define the port
-var port = process.env.PORT || 5000;
+var port = config.port;
+
+
 
 //tell express to use middleware for parsing the body
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.use(expressJwt({
+    secret: config.JWTSecret
+  }).unless({
+    path: ['/auth']
+  })
+);
+
 
 
 //Routes - as it is a function we execute

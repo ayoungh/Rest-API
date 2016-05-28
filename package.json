@@ -22,10 +22,13 @@
   "homepage": "https://github.com/ayoungh/Rest-API#readme",
   "dependencies": {
     "body-parser": "^1.15.0",
+    "cors": "^2.7.1",
     "express": "^4.13.4",
+    "express-jwt": "^3.4.0",
     "gulp": "^3.9.1",
     "gulp-mocha": "^2.2.0",
     "gulp-nodemon": "^2.0.6",
+    "jsonwebtoken": "^7.0.0",
     "mongoose": "^4.4.11",
     "open": "0.0.5",
     "should": "^8.3.0",
